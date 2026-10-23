@@ -13,11 +13,17 @@
 <!--  LOBBY — visible before a game starts                          -->
 <!-- ============================================================= -->
 <div id="lobbyView" class="lobby-shell">
+    <div class="lobby-orbit lobby-orbit-one" aria-hidden="true"></div>
+    <div class="lobby-orbit lobby-orbit-two" aria-hidden="true"></div>
+    <header class="lobby-nav">
+        <div class="nav-mark"><span></span> SOC OPS</div>
+        <div class="nav-meta"><span class="nav-status"></span> Built for better rooms</div>
+    </header>
     <main class="lobby-layout">
         <section class="lobby-copy" aria-labelledby="lobbyTitle">
-            <div class="eyebrow"><span class="eyebrow-mark"></span> A social field guide</div>
+            <div class="eyebrow"><span class="eyebrow-mark"></span> A social field guide <span class="eyebrow-line"></span> 01 / 05</div>
             <h1 id="lobbyTitle">Soc <em>Ops</em></h1>
-            <p class="lobby-lede">Turn a room full of strangers into a room full of stories.</p>
+            <p class="lobby-lede">The low-pressure way to turn a room full of strangers into a room full of stories.</p>
 
             <div class="lobby-rule" aria-hidden="true"></div>
 
@@ -34,10 +40,14 @@
             <button onclick="launchGame()" class="primary-action">
                 <span>Start a new round</span><span class="action-arrow" aria-hidden="true">&#8594;</span>
             </button>
+            <div class="lobby-note"><span class="note-star" aria-hidden="true">&#10022;</span> No prep. No awkward intros. Just play.</div>
         </section>
 
         <aside class="lobby-art" aria-label="Preview of the bingo board">
-            <div class="art-label">SOCIAL BINGO <span>001</span></div>
+            <div class="art-topline">
+                <div class="art-label">SOCIAL BINGO <span>001</span></div>
+                <div class="art-live"><span></span> Live in the room</div>
+            </div>
             <div class="preview-board" aria-hidden="true">
                 <span class="preview-tile">Has lived<br/>abroad</span>
                 <span class="preview-tile preview-tile-marked">Knows a<br/>good joke</span>
@@ -65,9 +75,15 @@
                 <span class="preview-tile">Can recommend<br/>a book</span>
                 <span class="preview-tile">Has a<br/>big ambition</span>
             </div>
-            <div class="art-caption"><span class="caption-line"></span> The fastest way to start a conversation.</div>
+            <div class="art-footer">
+                <div class="art-caption"><span class="caption-line"></span> The fastest way to start a conversation.</div>
+                <div class="art-count"><strong>25</strong><span>prompts<br/>to discover</span></div>
+            </div>
         </aside>
     </div>
+    <footer class="lobby-footer">
+        <span>For team offsites</span><span>·</span><span>For first dates</span><span>·</span><span>For any room worth warming up</span>
+    </footer>
 </div>
 
 <!-- ============================================================= -->
