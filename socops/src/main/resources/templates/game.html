@@ -3,72 +3,104 @@
 <head>
 <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Soc Ops — Social Bingo</title>
+    <title>Soc Ops | Social Bingo</title>
     <link rel="stylesheet" th:href="@{/css/app.css}"/>
     <link rel="icon" type="image/png" th:href="@{/favicon.png}"/>
-    <style>
-        /* active-state tweaks that need pseudo-class selectors */
-        .tile-active:active { background-color: #f3f4f6 !important; }
-        .accent-active:active { background-color: #3b82f6 !important; }
-    </style>
 </head>
 <body class="h-full">
 
 <!-- ============================================================= -->
 <!--  LOBBY — visible before a game starts                          -->
 <!-- ============================================================= -->
-<div id="lobbyView" class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div id="lobbyView" class="lobby-shell">
+    <main class="lobby-layout">
+        <section class="lobby-copy" aria-labelledby="lobbyTitle">
+            <div class="eyebrow"><span class="eyebrow-mark"></span> A social field guide</div>
+            <h1 id="lobbyTitle">Soc <em>Ops</em></h1>
+            <p class="lobby-lede">Turn a room full of strangers into a room full of stories.</p>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
-            </ul>
-        </div>
+            <div class="lobby-rule" aria-hidden="true"></div>
 
-        <button onclick="launchGame()"
-                class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg accent-active transition-colors">
-            Start Game
-        </button>
+            <div class="how-to">
+                <p class="section-kicker">The brief</p>
+                <h2>Find the people behind the prompts.</h2>
+                <ol class="steps-list">
+                    <li><span>01</span><strong>Start a round</strong><small>Get a fresh field of conversation starters.</small></li>
+                    <li><span>02</span><strong>Make a match</strong><small>Ask around, listen closely, and tap a square.</small></li>
+                    <li><span>03</span><strong>Connect five</strong><small>Complete a line and call it: Bingo.</small></li>
+                </ol>
+            </div>
+
+            <button onclick="launchGame()" class="primary-action">
+                <span>Start a new round</span><span class="action-arrow" aria-hidden="true">&#8594;</span>
+            </button>
+        </section>
+
+        <aside class="lobby-art" aria-label="Preview of the bingo board">
+            <div class="art-label">SOCIAL BINGO <span>001</span></div>
+            <div class="preview-board" aria-hidden="true">
+                <span class="preview-tile">Has lived<br/>abroad</span>
+                <span class="preview-tile preview-tile-marked">Knows a<br/>good joke</span>
+                <span class="preview-tile">Plays an<br/>instrument</span>
+                <span class="preview-tile">Is an early<br/>riser</span>
+                <span class="preview-tile">Loves a<br/>road trip</span>
+                <span class="preview-tile">Can cook<br/>one dish well</span>
+                <span class="preview-tile">Has met a<br/>famous person</span>
+                <span class="preview-tile preview-tile-free">FREE<br/><small>SPACE</small></span>
+                <span class="preview-tile">Speaks more<br/>than one language</span>
+                <span class="preview-tile">Has a<br/>hidden talent</span>
+                <span class="preview-tile">Prefers<br/>tea</span>
+                <span class="preview-tile">Has a pet<br/>with a story</span>
+                <span class="preview-tile">Loves live<br/>music</span>
+                <span class="preview-tile preview-tile-marked">Is a<br/>morning person</span>
+                <span class="preview-tile">Has a<br/>travel ritual</span>
+                <span class="preview-tile">Can name a<br/>local landmark</span>
+                <span class="preview-tile">Reads for<br/>fun</span>
+                <span class="preview-tile">Has tried a<br/>new hobby</span>
+                <span class="preview-tile">Knows the<br/>best snack</span>
+                <span class="preview-tile">Enjoys a<br/>team sport</span>
+                <span class="preview-tile">Has a<br/>creative outlet</span>
+                <span class="preview-tile">Likes to<br/>dance</span>
+                <span class="preview-tile">Has a<br/>signature song</span>
+                <span class="preview-tile">Can recommend<br/>a book</span>
+                <span class="preview-tile">Has a<br/>big ambition</span>
+            </div>
+            <div class="art-caption"><span class="caption-line"></span> The fastest way to start a conversation.</div>
+        </aside>
     </div>
 </div>
 
 <!-- ============================================================= -->
 <!--  ACTIVE GAME — board, header, optional bingo banner            -->
 <!-- ============================================================= -->
-<div id="activeView" class="flex flex-col min-h-full bg-gray-50" style="display:none">
+<div id="activeView" class="game-shell" style="display:none">
 
     <!-- top bar -->
-    <header class="flex items-center justify-between p-3 bg-white border-b border-gray-200">
-        <button onclick="retreatToLobby()"
-                class="text-gray-500 text-sm px-3 py-1\.5 rounded tile-active">
-            &#8592; Back
+    <header class="game-header">
+        <button onclick="retreatToLobby()" class="back-action">
+            <span aria-hidden="true">&#8592;</span> Back to lobby
         </button>
-        <h1 class="font-bold text-gray-900">Soc Ops</h1>
-        <div class="w-16"></div>
+        <div class="game-brand">SOC <em>OPS</em></div>
+        <div class="round-label">ROUND <span>01</span></div>
     </header>
 
     <!-- hint -->
-    <p class="text-center text-gray-500 text-sm py-2 px-4">
-        Tap a square when you find someone who matches it.
-    </p>
+    <div class="game-intro">
+        <p class="section-kicker">Your conversation field guide</p>
+        <p>Tap a square when you find someone who matches it.</p>
+    </div>
 
     <!-- bingo banner (hidden until victory) -->
     <div id="bingoBanner"
-         class="bg-amber-100 text-amber-800 text-center py-2 font-semibold text-sm"
+         class="bingo-banner"
          style="display:none">
-        &#127881; BINGO! You got a line!
+        <span aria-hidden="true">&#10022;</span> BINGO! You got a line.
     </div>
 
     <!-- the 5×5 grid -->
-    <div class="flex-1 flex items-center justify-center p-3">
+    <div class="board-stage">
         <div id="gridContainer"
-             class="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
+             class="bingo-grid">
             <!-- tiles injected by JS -->
         </div>
     </div>
@@ -78,15 +110,16 @@
 <!--  VICTORY MODAL — overlays the board                            -->
 <!-- ============================================================= -->
 <div id="victoryOverlay"
-     class="fixed inset-0 bg-black\/50 flex items-center justify-center p-4 z-50"
+     class="victory-layer"
+     role="presentation"
      style="display:none">
-    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center shadow-xl animate-[bounce_0.5s_ease-out]">
-        <div class="text-5xl mb-4">&#127881;</div>
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">BINGO!</h2>
-        <p class="text-gray-600 mb-6">You completed a line!</p>
-        <button onclick="dismissVictoryModal()"
-                class="w-full bg-accent text-white font-semibold py-3 px-6 rounded-lg accent-active transition-colors">
-            Keep Playing
+    <div class="victory-dialog" role="dialog" aria-modal="true" aria-labelledby="victoryTitle">
+        <div class="victory-spark" aria-hidden="true">&#10022;</div>
+        <p class="section-kicker">A line is complete</p>
+        <h2 id="victoryTitle">Bingo!</h2>
+        <p class="victory-copy">You found five connections. Keep the conversation going.</p>
+        <button onclick="dismissVictoryModal()" class="primary-action">
+            <span>Keep playing</span><span class="action-arrow" aria-hidden="true">&#8594;</span>
         </button>
     </div>
 </div>
@@ -134,20 +167,18 @@
             var btn = document.createElement("button");
 
             /* base styling identical to the original Blazor BingoSquare */
-            var base = "relative flex items-center justify-center p-1 text-center " +
-                       "border border-gray-300 rounded transition-all duration-150 " +
-                       "select-none min-h-[60px] text-xs leading-tight";
+            var base = "bingo-tile";
 
             var state;
             if (tile.selected) {
                 state = winIds[tile.id]
-                    ? "bg-amber-200 border-amber-400 text-amber-900"
-                    : "bg-marked border-marked-border text-green-800";
+                    ? "tile-winning"
+                    : "tile-marked";
             } else {
-                state = "bg-white text-gray-700 tile-active";
+                state = "tile-open";
             }
 
-            var extra = tile.freeCell ? " font-bold text-sm" : "";
+            var extra = tile.freeCell ? " tile-free" : "";
             btn.className = base + " " + state + extra;
 
             if (tile.freeCell) { btn.disabled = true; }
@@ -156,14 +187,14 @@
 
             /* inner label */
             var labelSpan = document.createElement("span");
-            labelSpan.className = "wrap-break-word hyphens-auto";
+            labelSpan.className = "tile-label wrap-break-word hyphens-auto";
             labelSpan.textContent = tile.prompt;
             btn.appendChild(labelSpan);
 
             /* check-mark for marked non-free tiles */
             if (tile.selected && !tile.freeCell) {
                 var tick = document.createElement("span");
-                tick.className = "absolute top-0.5 right-0.5 text-green-600 text-xs";
+                tick.className = "tile-check";
                 tick.textContent = "\u2713";
                 btn.appendChild(tick);
             }
