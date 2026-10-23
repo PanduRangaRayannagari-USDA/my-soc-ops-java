@@ -24,6 +24,15 @@ Before finishing a code change:
 - Keep CSS changes in `socops/src/main/resources/static/css/app.css` and compose the utility classes documented in `.github/instructions/css-utilities.instructions.md`.
 - Follow `.github/instructions/frontend-design.instructions.md` for UI work.
 
+## Design Guide
+
+- Treat `game.html` as a focused game interface: preserve clear board state, readable controls, and responsive behavior across desktop and mobile layouts.
+- Build visual hierarchy with the existing CSS utilities and theme variables instead of introducing a new styling framework or scattered inline styles.
+- Prefer a distinctive, cohesive visual direction over generic dashboard patterns; use typography, color, spacing, and subtle motion intentionally.
+- Keep animations purposeful and lightweight, with CSS-first transitions that do not interfere with gameplay or accessibility.
+- Verify UI changes in a running application and preserve keyboard access, readable contrast, and visible selected or marked states.
+- See `.github/instructions/frontend-design.instructions.md` for the visual direction and `.github/instructions/css-utilities.instructions.md` for available styling utilities.
+
 ## Build and Test
 
 - Use the Maven Wrapper from the `socops` directory:
